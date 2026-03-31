@@ -41,7 +41,7 @@ Copy the example compose file:
 cp example.docker-compose.yml docker-compose.yml
 ```
 
-Open `docker-compose.yml` and update the Traefik labels on the `web` service to use your domain (if applicable):
+If using Traefik, open `docker-compose.yml` and update the Traefik labels on the `web` service to use your domain:
 
 ```yaml
 - "traefik.http.routers.sites-dashboard.rule=Host(`dashboard.example.com`)"

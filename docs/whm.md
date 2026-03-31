@@ -9,9 +9,9 @@ connect it to the dashboard.
 
 ---
 
-## WHM
+## 1. WHM
 
-### Basic WebHost Manager Setup
+Go to the new WHM server and navigate to **Server Configuration -> Basic WebHost Manager Setup**
 
 1. Scroll to the bottom and set the nameservers:
     - **Nameserver 1:** `[your nameserver]`
@@ -20,9 +20,9 @@ connect it to the dashboard.
 
 ---
 
-### Tweak Settings
+Go to **Server Configuration -> Tweak Settings -> Domains
 
-Disable the following options in the **Domains** section:
+Disable the following options:
 
 | Setting                                            | Value |
 |----------------------------------------------------|-------|
@@ -34,9 +34,9 @@ Click **Save**
 
 ---
 
-### Edit Zone Templates
+Go to **DNS Functions -> Edit Zone Templates -> standardvirtualftp**
 
-Open `standardvirtualftp` and comment out the following two lines by adding a `;` at the start of each:
+Comment out the following two lines by adding a `;` at the start of each:
 
 - `mail IN CNAME %maildomain%.`
 - `%domain%. IN MX 0 %domain%.`
@@ -77,9 +77,7 @@ www IN CNAME %domain%.
 
 ---
 
-### Add a Package
-
-Navigate to **Packages > Add a Package** and configure with the following settings:
+Go to **Packages -> Add a Package** and configure with the following settings:
 
 | Setting                                    | Value            |
 |--------------------------------------------|------------------|
@@ -107,11 +105,11 @@ Navigate to **Packages > Add a Package** and configure with the following settin
 
 ---
 
-## WHMCS
+## 2. WHMCS
 
-### Add Server to WHMCS
+Add the new WHM server to WHMCS
 
-1. Go to **System Settings > Servers > Add New Server**
+1. Go to **System Settings -> Servers -> Add New Server**
 2. Configure the server:
 
 | Field                  | Value                                   |
@@ -141,11 +139,11 @@ Navigate to **Packages > Add a Package** and configure with the following settin
 
 ---
 
-## DNS Manager
+## 3. WHMCS DNS Manager Addon Configuation
 
-### Add Server to DNS Manager
+Add the new WHM server to the DNS Manager addon.
 
-1. Go to **Settings > Servers > Add Server**
+1. Go to **Settings -> Servers -> Add Server**
 2. Configure the server: **General**
 
 | Field                      | Value               |
@@ -178,9 +176,11 @@ Navigate to **Packages > Add a Package** and configure with the following settin
 
 Click **Confirm**
 
+---
+
 ### Update SPF Record
 
-Edit the **Prime Host Record List** record set to use the IP address of the new server.
+Go to **DNS Manager -> Settings -> Record Sets -> [Your site product]** and edit the record set for your site product to use the IP address of the new server.
 
 **Example:**
 
@@ -189,21 +189,25 @@ Before: v=spf1 +a +mx +ip4:192.168.1.1 include:_spf.google.com ~all
 After:  v=spf1 +a +mx +ip4:192.168.1.2 include:_spf.google.com ~all
 ```
 
+---
+
 ### Update Package Server Assignment
 
-1. Open the package for the desired product and go to the **Servers** tab
-2. Click the trash icon next to the existing server
-3. Click **Add Server** and choose the new server
+Go to **DNS Manager -> Settings -> Packages** 
+
+1. Edit the package for the desired product and go to the **Servers** tab
+2. Click **Add Server** and choose the new server
+3. Make the new server the master server and turn all the others off
 
 ---
 
-## Change Server in PCS API Call
+## Change Server in Apex API Call
 
-Ask the PCS team to update the server ID in the `IF Prime Host` statement to the new server ID obtained from WHMCS.
+Ask the team placing calls in Apex from Salesforce to update the server ID in the `IF [your product]` (e.g. "Prime Host") statement to the new server ID obtained from WHMCS.
 
 ---
 
-## Sites Dashboard
+## 3. Sites Dashboard
 
 ### Add API Key in WHM
 
