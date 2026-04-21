@@ -31,6 +31,8 @@ cp example.env .env
 
 See [Configuration](configuration.md) for a description of every variable. At minimum, set a strong `DJANGO_SECRET_KEY` and `POSTGRES_PASSWORD` before starting.
 
+> **Docker-first Configuration:** The default environment values work immediately with Docker Compose. Variables like `POSTGRES_HOST`, `PLAYWRIGHT_URL`, and `SCREENSHOTS_DIR` default to Docker-compatible values (`db`, `ws://playwright:3000/`, `/app/screenshots`). If running locally without Docker, you must override these — see [Configuration](configuration.md#local-development) for local development settings.
+
 ---
 
 ## 3. Configure Docker Compose

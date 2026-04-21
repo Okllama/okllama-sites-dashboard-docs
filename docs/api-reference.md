@@ -326,6 +326,11 @@ initialized. Runs asynchronously.
 
 **Required permission:** `loadyootheme`
 
+**Environment Requirements:**
+- Requires `PLAYWRIGHT_URL` to point to a running Playwright WebSocket server
+- Saves screenshots to `SCREENSHOTS_DIR` (defaults work in Docker, local dev must override)
+- See [Configuration](configuration.md) for environment variable details
+
 **Request body**
 
 | Field    | Type   | Required | Description        |
